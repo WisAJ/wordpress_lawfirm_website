@@ -10,14 +10,16 @@ function team(){
         )
     );
     $i = 1;
-    $str = '<div class="elementor-row">';
+$str = '<section class="elementor-section elementor-top-section elementor-element  elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">';
     while ($query->have_posts()):
         $query->the_post();
         $thumbnail = get_the_post_thumbnail_url(get_the_ID(), 'team');
         $str .= '
-        <div class="elementor-column elementor-col-33 elementor-top-column elementor-element " data-element_type="column">
-            <div class="elementor-column-wrap staff">
-                <div class="elemntor-widget-wrap staff">
+        <div class="elementor-column elementor-col-33 elementor-top-column elementor-element"  data-element_type="column">
+            <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element  elementor-widget elementor-widget-heading"  data-element_type="widget" data-widget_type="heading.default">
+            <div class="elementor-widget-container staff">
                     <div class="image-wrapper">
                         <a href="'.get_the_permalink().'" title="'.get_the_title().'"><img src="'.$thumbnail.'" alt="'.get_the_title().'"></a>
                     </div>
@@ -32,12 +34,14 @@ function team(){
                             </div>
                     </div>
                 </div>
+                </div>
             </div>
         </div>';
 
         if($i % 3 == 0):
-            $str .= '</div>';
-            $str .= '<div class="elementor-row">';
+            $str .= '</section>';
+            $str .= '<section class="elementor-section elementor-top-section elementor-element  elementor-section-boxed elementor-section-height-default elementor-section-height-default"  data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">';
         endif;
         $i++;
 
@@ -49,7 +53,7 @@ function team(){
 
 add_shortcode('team', 'team');
 
-//  this is new, ie. below ;
+//  this is new, ie. below, to put filter and order the team members in the dashboard of wp ;
 
 add_filter('manage_team_posts_columns', 'team_columns');
 
@@ -78,3 +82,6 @@ function team_show_columns($column_name){
         echo $post->menu_order;
     endif;
 }
+
+
+
